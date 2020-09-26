@@ -66,11 +66,40 @@ class App extends Component {
   };
 
   deleteTask = (id) => {
-    console.log("delete" + id);
+    //by removing element
+    const tasks = [...this.state.tasks];
+    const index = tasks.findIndex((task) => task.id === id); // index is -1 when element has not been found
+    if (index >= 0) {
+      tasks.splice(index, 1);
+    } else {
+      return;
+    }
+
+    this.setState({
+      tasks,
+    });
+
+    // by using filter
+    // let tasks = [...this.state.tasks];
+    // tasks = tasks.filter(task => task.id !== id);
+
+    // this.setState({
+    //   tasks,
+    // });
   };
 
   changeTaskStatus = (id) => {
-    console.log("inactive" + id);
+    const tasks = [...this.state.tasks];
+    tasks.forEach((task) => {
+      if (task.id === id) {
+        task.isActive = false;
+        task.finishDate = new Date().getTime();
+      }
+    });
+
+    this.setState({
+      tasks,
+    });
   };
 
   render() {

@@ -65,7 +65,7 @@ class App extends Component {
     ],
   };
 
-  idCounter = this.state.tasks.length;
+  idCounter = this.state.tasks.length + 1;
 
   deleteTask = (id) => {
     //by removing element

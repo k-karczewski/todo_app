@@ -65,6 +65,8 @@ class App extends Component {
     ],
   };
 
+  idCounter = this.state.tasks.length;
+
   deleteTask = (id) => {
     //by removing element
     const tasks = [...this.state.tasks];
@@ -102,11 +104,29 @@ class App extends Component {
     });
   };
 
+  addTask = (text, date, isImportant) => {
+    const newTask = {
+      id: this.idCounter,
+      text,
+      date,
+      isImportant,
+      isActive: true,
+      finishDate: null,
+    };
+
+    this.setState({
+      tasks: [...this.state.tasks, newTask],
+    });
+
+    this.idCounter++;
+    return true;
+  };
+
   render() {
     return (
       <div className="App">
         <h1>TODO APP</h1>
-        <AddTask />
+        <AddTask add={this.addTask} />
         <TaskList
           tasks={this.state.tasks}
           deleteTaskHandler={this.deleteTask}
